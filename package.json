@@ -4,9 +4,24 @@
   "description": "Typescript and React Project",
   "main": "index.js",
   "scripts": {
+    "dev":"webpack-cli server",
+    "build":"webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "type:check":"tsc",
-    "lint:ts": "eslint './src/**/*.{ts,tsx}'"
+    "lint:ts": "eslint './src/**/*.{ts,tsx}'",
+    "lint:css":"stylelint './src/**/*.{ts,tsx}'",
+    "lint":"npm lint:ts && npm lint:css"
+  },
+  "husky":{
+    "hooks":{
+      "pre-commit":"lint-staged"
+    }
+  },
+  "lint-staged":{
+    "*.{tsx,ts}":[
+      "prettier --write",
+      "npm lint"
+    ]
   },
   "author": "",
   "license": "ISC",
